@@ -9,16 +9,16 @@ app.use(express.urlencoded({
 
 const db = require('./app/models');
 db.mongoose.connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-})
-.then((result) => {
-    console.log('Database connect');
-}).catch((err) => {
-    console.log('Cannot connect to database!', err);
-    process.exit();
-});
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+    })
+    .then((result) => {
+        console.log('Database connect');
+    }).catch((err) => {
+        console.log('Cannot connect to database!', err);
+        process.exit();
+    });
 
 app.get('/', (req, res) => {
     res.json({
@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
     })
 });
 
-
+require('./app/routes/product')(app);
+require('./app/routes/order')(app);
 
 app.listen(PORT, () => {
     console.log(`Listening on port http://localhost:${PORT}`);
