@@ -11,3 +11,16 @@ exports.findAll = (req, res) => {
             })
         });
 }
+
+exports.findOne = (req, res) => {
+    Product.findOne({
+            code: req.params.id
+        })
+        .then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.status(409).send({
+                message: err.message
+            })
+        });
+}
